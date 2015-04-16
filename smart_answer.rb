@@ -18,14 +18,6 @@ class SmartAnswer
     student_origin_info = uk_origin? ? 'UK' : 'EU'
     study_mode_info = full_time? ? 'Full-Time' : 'Part-Time'
     childcare_grant_info = eligible_for_childcare_grant? ? 'Info about childcare grant' : nil
-    maintenance_grant = case household_income
-    when 0..25000
-      3387
-    when 25001..42620
-      3387 - ((household_income - 25000) / 5.28).floor
-    else
-      0
-    end
     maintenance_grant_info = eligible_for_maintenance_grant? ? "Maintenance grant: #{maintenance_grant}" : nil
     "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} #{maintenance_grant_info}"
   end
@@ -52,5 +44,16 @@ class SmartAnswer
   
   def eligible_for_maintenance_grant?
     uk_origin? && full_time?
+  end
+  
+  def maintenance_grant
+    case household_income
+    when 0..25000
+      3387
+    when 25001..42620
+      3387 - ((household_income - 25000) / 5.28).floor
+    else
+      0
+    end
   end
 end
