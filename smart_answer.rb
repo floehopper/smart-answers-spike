@@ -26,7 +26,7 @@ class SmartAnswer
     else
       0
     end
-    "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info} #{maintenance_grant}"
+    "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} Maintenance grant: #{maintenance_grant}"
   end
   
   def valid?
