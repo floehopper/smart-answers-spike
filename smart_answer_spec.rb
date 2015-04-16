@@ -6,6 +6,12 @@ $LOAD_PATH.unshift('.')
 require 'smart_answer'
 
 RSpec.describe SmartAnswer do
+  
+  it 'should display tuition fees' do
+    subject.tuition_fees = 6000
+    expect(subject.outcome).to match('6000')
+  end
+
   context 'Full-time student' do
     before do
       subject.study_mode = SmartAnswer::FULL_TIME
@@ -42,32 +48,21 @@ RSpec.describe SmartAnswer do
     before do
       subject.study_mode = SmartAnswer::FULL_TIME
       subject.student_origin = SmartAnswer::EU
-      subject.tuition_fees = 8000
     end
 
     it 'should display information about finance for full-time EU students' do
       expect(subject.outcome).to match('EU Full-Time')
     end
-
-    it 'should display tuition fees' do
-      expect(subject.outcome).to match('8000')
-    end
-    
   end
 
   context 'EU student part-time' do
     before do
       subject.study_mode = SmartAnswer::PART_TIME
       subject.student_origin = SmartAnswer::EU
-      subject.tuition_fees = 6000
     end
 
     it 'should display information about finance for part-time EU students' do
       expect(subject.outcome).to match('EU Part-Time')
-    end
-
-    it 'should display tuition fees' do
-      expect(subject.outcome).to match('6000')
     end
   end
 
@@ -75,15 +70,10 @@ RSpec.describe SmartAnswer do
     before do
       subject.study_mode = SmartAnswer::FULL_TIME
       subject.student_origin = SmartAnswer::UK
-      subject.tuition_fees = 8000
     end
     
     it 'should display information about finance for full-time UK students' do
       expect(subject.outcome).to match('UK Full-Time')
-    end
-
-    it 'should display tuition fees' do
-      expect(subject.outcome).to match('8000')
     end
   end
 
@@ -91,15 +81,10 @@ RSpec.describe SmartAnswer do
     before do
       subject.study_mode = SmartAnswer::PART_TIME
       subject.student_origin = SmartAnswer::UK
-      subject.tuition_fees = 6000
     end
     
     it 'should display information about finance for part-time UK students' do
       expect(subject.outcome).to match('UK Part-Time')
-    end
-
-    it 'should display tuition fees' do
-      expect(subject.outcome).to match('6000')
     end
   end
 end
