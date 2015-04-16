@@ -41,6 +41,12 @@ class SmartAnswer
   end
   
   class Student
+    EU = :eu
+    UK = :uk
+
+    PART_TIME = :part_time
+    FULL_TIME = :full_time
+
     attr_accessor :study_mode
     attr_accessor :student_origin
     attr_accessor :tuition_fees
@@ -56,12 +62,6 @@ class SmartAnswer
     end
   end
   
-  EU = :eu
-  UK = :uk
-
-  PART_TIME = :part_time
-  FULL_TIME = :full_time
-
   FULL_TIME_TUITION_FEES_MAXIMUM = 9000
   PART_TIME_TUITION_FEES_MAXIMUM = 6750
   

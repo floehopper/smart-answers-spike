@@ -14,7 +14,7 @@ RSpec.describe SmartAnswer do
 
   context 'Full-time student' do
     before do
-      subject.study_mode = SmartAnswer::FULL_TIME
+      subject.study_mode = SmartAnswer::Student::FULL_TIME
     end
     
     it 'should have valid tuition fees if fees are less than or equal to the maximum' do
@@ -30,7 +30,7 @@ RSpec.describe SmartAnswer do
 
   context 'Part-time student' do
     before do
-      subject.study_mode = SmartAnswer::PART_TIME
+      subject.study_mode = SmartAnswer::Student::PART_TIME
     end
     
     it 'should have valid tuition fees if fees are less than or equal to the maximum' do
@@ -46,7 +46,7 @@ RSpec.describe SmartAnswer do
   
   context 'EU student' do
     before do
-      subject.student_origin = SmartAnswer::EU
+      subject.student_origin = SmartAnswer::Student::EU
     end
 
     context 'with children under 17' do
@@ -66,8 +66,8 @@ RSpec.describe SmartAnswer do
   
   context 'EU student full-time' do
     before do
-      subject.study_mode = SmartAnswer::FULL_TIME
-      subject.student_origin = SmartAnswer::EU
+      subject.study_mode = SmartAnswer::Student::FULL_TIME
+      subject.student_origin = SmartAnswer::Student::EU
     end
 
     it 'should display information about finance for full-time EU students' do
@@ -77,8 +77,8 @@ RSpec.describe SmartAnswer do
 
   context 'EU student part-time' do
     before do
-      subject.study_mode = SmartAnswer::PART_TIME
-      subject.student_origin = SmartAnswer::EU
+      subject.study_mode = SmartAnswer::Student::PART_TIME
+      subject.student_origin = SmartAnswer::Student::EU
     end
 
     it 'should display information about finance for part-time EU students' do
@@ -88,8 +88,8 @@ RSpec.describe SmartAnswer do
 
   context 'UK student full-time' do
     before do
-      subject.study_mode = SmartAnswer::FULL_TIME
-      subject.student_origin = SmartAnswer::UK
+      subject.study_mode = SmartAnswer::Student::FULL_TIME
+      subject.student_origin = SmartAnswer::Student::UK
     end
     
     it 'should display information about finance for full-time UK students' do
@@ -143,8 +143,8 @@ RSpec.describe SmartAnswer do
 
   context 'UK student part-time' do
     before do
-      subject.study_mode = SmartAnswer::PART_TIME
-      subject.student_origin = SmartAnswer::UK
+      subject.study_mode = SmartAnswer::Student::PART_TIME
+      subject.student_origin = SmartAnswer::Student::UK
     end
     
     it 'should display information about finance for part-time UK students' do
