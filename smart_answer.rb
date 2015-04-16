@@ -7,8 +7,8 @@ class SmartAnswer
 
     attr_reader :household_income
 
-    def initialize(household_income)
-      @household_income = household_income
+    def initialize(student)
+      @household_income = student.household_income
     end
     
     def amount
@@ -95,6 +95,6 @@ class SmartAnswer
   end
   
   def maintenance_grant
-    MaintenanceGrant.new(household_income).amount
+    MaintenanceGrant.new(@student).amount
   end
 end
