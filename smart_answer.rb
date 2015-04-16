@@ -24,6 +24,14 @@ class SmartAnswer
     end
   end
   
+  class Student
+    attr_accessor :study_mode
+    attr_accessor :student_origin
+    attr_accessor :tuition_fees
+    attr_accessor :has_children
+    attr_accessor :household_income
+  end
+  
   EU = :eu
   UK = :uk
 
@@ -33,11 +41,23 @@ class SmartAnswer
   FULL_TIME_TUITION_FEES_MAXIMUM = 9000
   PART_TIME_TUITION_FEES_MAXIMUM = 6750
   
-  attr_accessor :study_mode
-  attr_accessor :student_origin
-  attr_accessor :tuition_fees
-  attr_accessor :has_children
-  attr_accessor :household_income
+  extend Forwardable
+
+  def_delegator :@student, :study_mode, :study_mode
+  def_delegator :@student, :student_origin, :student_origin
+  def_delegator :@student, :tuition_fees, :tuition_fees
+  def_delegator :@student, :has_children, :has_children
+  def_delegator :@student, :household_income, :household_income
+
+  def_delegator :@student, :study_mode=, :study_mode=
+  def_delegator :@student, :student_origin=, :student_origin=
+  def_delegator :@student, :tuition_fees=, :tuition_fees=
+  def_delegator :@student, :has_children=, :has_children=
+  def_delegator :@student, :household_income=, :household_income=
+  
+  def initialize
+    @student = Student.new
+  end
   
   def outcome
     student_origin_info = uk_origin? ? 'UK' : 'EU'
