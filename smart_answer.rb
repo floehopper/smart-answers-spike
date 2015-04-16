@@ -5,18 +5,22 @@ class SmartAnswer
     HOUSEHOLD_INCOME_UPPER_THRESHOLD = 42620
     HOUSEHOLD_INCOME_DIVISOR = 5.28
 
-    attr_reader :household_income
+    attr_reader :student
 
     def initialize(student)
-      @household_income = student.household_income
+      @student = student
+    end
+    
+    def available?
+      student.uk_origin? && student.full_time?
     end
     
     def amount
-      case household_income
+      case student.household_income
       when 0..HOUSEHOLD_INCOME_LOWER_THRESHOLD
         MAXIMUM
       when (HOUSEHOLD_INCOME_LOWER_THRESHOLD + 1)..HOUSEHOLD_INCOME_UPPER_THRESHOLD
-        household_income_above_lower_threshold = (household_income - HOUSEHOLD_INCOME_LOWER_THRESHOLD)
+        household_income_above_lower_threshold = (student.household_income - HOUSEHOLD_INCOME_LOWER_THRESHOLD)
         MAXIMUM - (household_income_above_lower_threshold / HOUSEHOLD_INCOME_DIVISOR).floor
       else
         0
@@ -91,7 +95,7 @@ class SmartAnswer
   end
   
   def eligible_for_maintenance_grant?
-    uk_origin? && full_time?
+    MaintenanceGrant.new(@student).available?
   end
   
   def maintenance_grant
