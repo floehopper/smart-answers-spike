@@ -7,6 +7,11 @@ class SmartAnswer
 
   FULL_TIME_TUITION_FEES_MAXIMUM = 9000
   PART_TIME_TUITION_FEES_MAXIMUM = 6750
+  
+  MAINTENANCE_GRANT_MAXIMUM = 3387
+  MAINTENANCE_GRANT_HOUSEHOLD_INCOME_LOWER_THRESHOLD = 25000
+  MAINTENANCE_GRANT_HOUSEHOLD_INCOME_UPPER_THRESHOLD = 42620
+  MAINTENANCE_GRANT_HOUSEHOLD_INCOME_DIVISOR = 5.28
 
   attr_accessor :study_mode
   attr_accessor :student_origin
@@ -48,10 +53,11 @@ class SmartAnswer
   
   def maintenance_grant
     case household_income
-    when 0..25000
-      3387
-    when 25001..42620
-      3387 - ((household_income - 25000) / 5.28).floor
+    when 0..MAINTENANCE_GRANT_HOUSEHOLD_INCOME_LOWER_THRESHOLD
+      MAINTENANCE_GRANT_MAXIMUM
+    when (MAINTENANCE_GRANT_HOUSEHOLD_INCOME_LOWER_THRESHOLD + 1)..MAINTENANCE_GRANT_HOUSEHOLD_INCOME_UPPER_THRESHOLD
+      household_income_above_lower_threshold = (household_income - MAINTENANCE_GRANT_HOUSEHOLD_INCOME_LOWER_THRESHOLD)
+      MAINTENANCE_GRANT_MAXIMUM - (household_income_above_lower_threshold / MAINTENANCE_GRANT_HOUSEHOLD_INCOME_DIVISOR).floor
     else
       0
     end
