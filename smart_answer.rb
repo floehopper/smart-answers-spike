@@ -1,3 +1,5 @@
+require 'forwardable'
+
 class SmartAnswer
   class MaintenanceGrant
     MAXIMUM = 3387
