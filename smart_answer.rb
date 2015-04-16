@@ -14,10 +14,10 @@ class SmartAnswer
   attr_accessor :has_children
   
   def outcome
-    student_origin_info = (student_origin == EU) ? 'EU' : 'UK'
+    student_origin_info = uk_origin? ? 'UK' : 'EU'
     study_mode_info = full_time? ? 'Full-Time' : 'Part-Time'
     childcare_grant_info = nil
-    if (has_children && student_origin == UK && full_time?)
+    if (has_children && uk_origin? && full_time?)
       childcare_grant_info = 'Info about childcare grant'
     end
     "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info}"
@@ -33,5 +33,9 @@ class SmartAnswer
   
   def full_time?
     study_mode == FULL_TIME
+  end
+  
+  def uk_origin?
+    student_origin == UK
   end
 end
