@@ -97,8 +97,8 @@ RSpec.describe SmartAnswer do
     end
     
     it 'should display maximum maintenance grant amount if household income is less than or equal to lower threshold' do
-      subject.household_income = SmartAnswer::MAINTENANCE_GRANT_HOUSEHOLD_INCOME_LOWER_THRESHOLD
-      expect(subject.outcome).to match("Maintenance grant: #{SmartAnswer::MAINTENANCE_GRANT_MAXIMUM}")
+      subject.household_income = SmartAnswer::MaintenanceGrant::HOUSEHOLD_INCOME_LOWER_THRESHOLD
+      expect(subject.outcome).to match("Maintenance grant: #{SmartAnswer::MaintenanceGrant::MAXIMUM}")
     end
     
     it 'should display calculated maintenance grant amount if household income is greater than lower threshold and less than or equal to upper threshold' do
@@ -111,12 +111,12 @@ RSpec.describe SmartAnswer do
       subject.household_income = 40000
       expect(subject.outcome).to match('Maintenance grant: 547')
 
-      subject.household_income = SmartAnswer::MAINTENANCE_GRANT_HOUSEHOLD_INCOME_UPPER_THRESHOLD
+      subject.household_income = SmartAnswer::MaintenanceGrant::HOUSEHOLD_INCOME_UPPER_THRESHOLD
       expect(subject.outcome).to match('Maintenance grant: 50')
     end
     
     it 'should display zero maintenance grant amount if household income is greater than upper threshold' do
-      subject.household_income = SmartAnswer::MAINTENANCE_GRANT_HOUSEHOLD_INCOME_UPPER_THRESHOLD + 1
+      subject.household_income = SmartAnswer::MaintenanceGrant::HOUSEHOLD_INCOME_UPPER_THRESHOLD + 1
       expect(subject.outcome).to match('Maintenance grant: 0')
     end
 
