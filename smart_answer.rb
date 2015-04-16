@@ -72,6 +72,7 @@ class SmartAnswer
 
   def initialize
     @student = Student.new
+    @maintenance_grant = MaintenanceGrant.new(@student)
   end
   
   def outcome
@@ -95,10 +96,10 @@ class SmartAnswer
   end
   
   def eligible_for_maintenance_grant?
-    MaintenanceGrant.new(@student).available?
+    @maintenance_grant.available?
   end
   
   def maintenance_grant
-    MaintenanceGrant.new(@student).amount
+    @maintenance_grant.amount
   end
 end
