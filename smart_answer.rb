@@ -89,10 +89,6 @@ class SmartAnswer
   end
   
   def outcome
-    student_origin_info = uk_origin? ? 'UK' : 'EU'
-    study_mode_info = full_time? ? 'Full-Time' : 'Part-Time'
-    childcare_grant_info = eligible_for_childcare_grant? ? 'Info about childcare grant' : nil
-    maintenance_grant_info = eligible_for_maintenance_grant? ? "Maintenance grant: #{maintenance_grant}" : nil
     "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} #{maintenance_grant_info}"
   end
   
@@ -104,15 +100,19 @@ class SmartAnswer
     end
   end
   
-  def eligible_for_childcare_grant?
-    @childcare_grant.available?
+  def student_origin_info
+    @student.uk_origin? ? 'UK' : 'EU'
   end
   
-  def eligible_for_maintenance_grant?
-    @maintenance_grant.available?
+  def study_mode_info
+    @student.full_time? ? 'Full-Time' : 'Part-Time'
   end
   
-  def maintenance_grant
-    @maintenance_grant.amount
+  def childcare_grant_info
+    return 'Info about childcare grant' if @childcare_grant.available?
+  end
+  
+  def maintenance_grant_info
+    return "Maintenance grant: #{@maintenance_grant.amount}" if @maintenance_grant.available?
   end
 end
