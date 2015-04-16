@@ -58,38 +58,12 @@ RSpec.describe SmartAnswer do
         expect(subject.outcome).not_to match('Info about childcare grant')
       end
     end
+
+    it 'should not display information about maintenance grant' do
+      expect(subject.outcome).not_to match('Maintenance grant:')
+    end
   end
   
-  context 'UK student' do
-    before do
-      subject.student_origin = SmartAnswer::UK
-    end
-    
-    it 'should display maximum maintenance grant amount if household income is less than or equal to 25000' do
-      subject.household_income = 25000
-      expect(subject.outcome).to match('Maintenance grant: 3387')
-    end
-    
-    it 'should display calculated maintenance grant amount if household income is greater than 25000 and less than or equal to 42620' do
-      subject.household_income = 30000
-      expect(subject.outcome).to match('Maintenance grant: 2441')
-
-      subject.household_income = 35000
-      expect(subject.outcome).to match('Maintenance grant: 1494')
-
-      subject.household_income = 40000
-      expect(subject.outcome).to match('Maintenance grant: 547')
-
-      subject.household_income = 42620
-      expect(subject.outcome).to match('Maintenance grant: 50')
-    end
-    
-    it 'should display zero maintenance grant amount if household income is greater than 42620' do
-      subject.household_income = 42620 + 1
-      expect(subject.outcome).to match('Maintenance grant: 0')
-    end
-  end
-
   context 'EU student full-time' do
     before do
       subject.study_mode = SmartAnswer::FULL_TIME
@@ -122,6 +96,30 @@ RSpec.describe SmartAnswer do
       expect(subject.outcome).to match('UK Full-Time')
     end
     
+    it 'should display maximum maintenance grant amount if household income is less than or equal to 25000' do
+      subject.household_income = 25000
+      expect(subject.outcome).to match('Maintenance grant: 3387')
+    end
+    
+    it 'should display calculated maintenance grant amount if household income is greater than 25000 and less than or equal to 42620' do
+      subject.household_income = 30000
+      expect(subject.outcome).to match('Maintenance grant: 2441')
+
+      subject.household_income = 35000
+      expect(subject.outcome).to match('Maintenance grant: 1494')
+
+      subject.household_income = 40000
+      expect(subject.outcome).to match('Maintenance grant: 547')
+
+      subject.household_income = 42620
+      expect(subject.outcome).to match('Maintenance grant: 50')
+    end
+    
+    it 'should display zero maintenance grant amount if household income is greater than 42620' do
+      subject.household_income = 42620 + 1
+      expect(subject.outcome).to match('Maintenance grant: 0')
+    end
+
     context 'with children under 17' do
       before do
         subject.has_children = true
@@ -161,6 +159,10 @@ RSpec.describe SmartAnswer do
       it 'should not display information about childcare grant' do
         expect(subject.outcome).not_to match('Info about childcare grant')
       end
+    end
+    
+    it 'should not display information about maintenance grant' do
+      expect(subject.outcome).not_to match('Maintenance grant:')
     end
   end
 end

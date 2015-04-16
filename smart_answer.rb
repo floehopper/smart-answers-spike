@@ -26,7 +26,8 @@ class SmartAnswer
     else
       0
     end
-    "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} Maintenance grant: #{maintenance_grant}"
+    maintenance_grant_info = (uk_origin? && full_time?) ? "Maintenance grant: #{maintenance_grant}" : nil
+    "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} #{maintenance_grant_info}"
   end
   
   def valid?
