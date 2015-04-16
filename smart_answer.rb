@@ -89,7 +89,7 @@ class SmartAnswer
   end
   
   def outcome
-    "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} #{maintenance_grant_info}"
+    "#{student_origin_info} #{study_mode_info} #{tuition_fees_info} #{childcare_grant_info} #{maintenance_grant_info}"
   end
   
   def valid?
@@ -108,6 +108,10 @@ class SmartAnswer
     @student.full_time? ? 'Full-Time' : 'Part-Time'
   end
   
+  def tuition_fees_info
+    "Tuition fees: #{tuition_fees}"
+  end
+
   def childcare_grant_info
     return 'Info about childcare grant' if @childcare_grant.available?
   end
