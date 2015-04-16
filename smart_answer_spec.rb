@@ -75,6 +75,26 @@ RSpec.describe SmartAnswer do
     it 'should display information about finance for full-time UK students' do
       expect(subject.outcome).to match('UK Full-Time')
     end
+    
+    context 'with children under 17' do
+      before do
+        subject.has_children = true
+      end
+      
+      it 'should display information about childcare grant' do
+        expect(subject.outcome).to match('Info about childcare grant')
+      end
+    end
+    
+    context 'without children under 17' do
+      before do
+        subject.has_children = false
+      end
+
+      it 'should not display information about childcare grant' do
+        expect(subject.outcome).not_to match('Info about childcare grant')
+      end
+    end
   end
 
   context 'UK student part-time' do

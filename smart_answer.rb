@@ -11,11 +11,13 @@ class SmartAnswer
   attr_accessor :study_mode
   attr_accessor :student_origin
   attr_accessor :tuition_fees
+  attr_accessor :has_children
 
   def outcome
     student_origin_info = (student_origin == EU) ? 'EU' : 'UK'
     study_mode_info = (study_mode == PART_TIME) ? 'Part-Time' : 'Full-Time'
-    "#{student_origin_info} #{study_mode_info} #{tuition_fees}"
+    childcare_grant_info = has_children ? 'Info about childcare grant' : ''
+    "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info}"
   end
   
   def valid?
