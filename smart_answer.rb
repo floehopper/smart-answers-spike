@@ -26,7 +26,7 @@ class SmartAnswer
     else
       0
     end
-    maintenance_grant_info = (uk_origin? && full_time?) ? "Maintenance grant: #{maintenance_grant}" : nil
+    maintenance_grant_info = eligible_for_maintenance_grant? ? "Maintenance grant: #{maintenance_grant}" : nil
     "#{student_origin_info} #{study_mode_info} Tuition fees: #{tuition_fees} #{childcare_grant_info} #{maintenance_grant_info}"
   end
   
@@ -48,5 +48,9 @@ class SmartAnswer
   
   def eligible_for_childcare_grant?
     has_children && uk_origin? && full_time?
+  end
+  
+  def eligible_for_maintenance_grant?
+    uk_origin? && full_time?
   end
 end
