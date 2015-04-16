@@ -8,7 +8,8 @@ require 'smart_answer'
 RSpec.describe SmartAnswer do
   context 'EU student full-time' do
     before do
-      subject.student_type = SmartAnswer::EU_FULL_TIME
+      subject.study_mode = SmartAnswer::FULL_TIME
+      subject.student_origin = SmartAnswer::EU
       subject.tuition_fees = 8000
     end
 
@@ -33,7 +34,8 @@ RSpec.describe SmartAnswer do
 
   context 'EU student part-time' do
     before do
-      subject.student_type = SmartAnswer::EU_PART_TIME
+      subject.study_mode = SmartAnswer::PART_TIME
+      subject.student_origin = SmartAnswer::EU
       subject.tuition_fees = 6000
     end
 
@@ -58,7 +60,8 @@ RSpec.describe SmartAnswer do
 
   context 'UK student full-time' do
     before do
-      subject.student_type = SmartAnswer::UK_FULL_TIME
+      subject.study_mode = SmartAnswer::FULL_TIME
+      subject.student_origin = SmartAnswer::UK
       subject.tuition_fees = 8000
     end
     
@@ -83,7 +86,8 @@ RSpec.describe SmartAnswer do
 
   context 'UK student part-time' do
     before do
-      subject.student_type = SmartAnswer::UK_PART_TIME
+      subject.study_mode = SmartAnswer::PART_TIME
+      subject.student_origin = SmartAnswer::UK
       subject.tuition_fees = 6000
     end
     
