@@ -28,6 +28,18 @@ class SmartAnswer
     end
   end
   
+  class ChildcareGrant
+    attr_reader :student
+
+    def initialize(student)
+      @student = student
+    end
+    
+    def available?
+      student.has_children && student.uk_origin? && student.full_time?
+    end
+  end
+  
   class Student
     attr_accessor :study_mode
     attr_accessor :student_origin
@@ -73,6 +85,7 @@ class SmartAnswer
   def initialize
     @student = Student.new
     @maintenance_grant = MaintenanceGrant.new(@student)
+    @childcare_grant = ChildcareGrant.new(@student)
   end
   
   def outcome
@@ -92,7 +105,7 @@ class SmartAnswer
   end
   
   def eligible_for_childcare_grant?
-    has_children && uk_origin? && full_time?
+    @childcare_grant.available?
   end
   
   def eligible_for_maintenance_grant?
