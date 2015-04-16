@@ -30,6 +30,14 @@ class SmartAnswer
     attr_accessor :tuition_fees
     attr_accessor :has_children
     attr_accessor :household_income
+    
+    def full_time?
+      study_mode == FULL_TIME
+    end
+  
+    def uk_origin?
+      student_origin == UK
+    end
   end
   
   EU = :eu
@@ -55,6 +63,9 @@ class SmartAnswer
   def_delegator :@student, :has_children=, :has_children=
   def_delegator :@student, :household_income=, :household_income=
   
+  def_delegator :@student, :full_time?, :full_time?
+  def_delegator :@student, :uk_origin?, :uk_origin?
+
   def initialize
     @student = Student.new
   end
@@ -73,14 +84,6 @@ class SmartAnswer
     else
       tuition_fees <= PART_TIME_TUITION_FEES_MAXIMUM
     end
-  end
-  
-  def full_time?
-    study_mode == FULL_TIME
-  end
-  
-  def uk_origin?
-    student_origin == UK
   end
   
   def eligible_for_childcare_grant?
