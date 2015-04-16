@@ -43,6 +43,22 @@ RSpec.describe SmartAnswer do
       expect(subject).to_not be_valid
     end
   end
+  
+  context 'EU student' do
+    before do
+      subject.student_origin = SmartAnswer::EU
+    end
+
+    context 'with children under 17' do
+      before do
+        subject.has_children = true
+      end
+
+      it 'should not display information about childcare grant' do
+        expect(subject.outcome).not_to match('Info about childcare grant')
+      end
+    end
+  end
 
   context 'EU student full-time' do
     before do
@@ -105,6 +121,16 @@ RSpec.describe SmartAnswer do
     
     it 'should display information about finance for part-time UK students' do
       expect(subject.outcome).to match('UK Part-Time')
+    end
+
+    context 'with children under 17' do
+      before do
+        subject.has_children = true
+      end
+
+      it 'should not display information about childcare grant' do
+        expect(subject.outcome).not_to match('Info about childcare grant')
+      end
     end
   end
 end

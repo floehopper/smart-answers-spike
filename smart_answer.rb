@@ -16,7 +16,10 @@ class SmartAnswer
   def outcome
     student_origin_info = (student_origin == EU) ? 'EU' : 'UK'
     study_mode_info = (study_mode == PART_TIME) ? 'Part-Time' : 'Full-Time'
-    childcare_grant_info = has_children ? 'Info about childcare grant' : ''
+    childcare_grant_info = nil
+    if (has_children && student_origin == UK && study_mode == FULL_TIME)
+      childcare_grant_info = 'Info about childcare grant'
+    end
     "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info}"
   end
   
