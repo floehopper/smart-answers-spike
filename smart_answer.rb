@@ -12,12 +12,21 @@ class SmartAnswer
   attr_accessor :student_origin
   attr_accessor :tuition_fees
   attr_accessor :has_children
+  attr_accessor :household_income
   
   def outcome
     student_origin_info = uk_origin? ? 'UK' : 'EU'
     study_mode_info = full_time? ? 'Full-Time' : 'Part-Time'
     childcare_grant_info = eligible_for_childcare_grant? ? 'Info about childcare grant' : nil
-    "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info}"
+    maintenance_grant = case household_income
+    when 0..25000
+      3387
+    when 25001..42620
+      3387 - ((household_income - 25000) / 5.28).floor
+    else
+      0
+    end
+    "#{student_origin_info} #{study_mode_info} #{tuition_fees} #{childcare_grant_info} #{maintenance_grant}"
   end
   
   def valid?

@@ -59,6 +59,36 @@ RSpec.describe SmartAnswer do
       end
     end
   end
+  
+  context 'UK student' do
+    before do
+      subject.student_origin = SmartAnswer::UK
+    end
+    
+    it 'should display maximum maintenance grant amount if household income is less than or equal to 25000' do
+      subject.household_income = 25000
+      expect(subject.outcome).to match('3387')
+    end
+    
+    it 'should display calculated maintenance grant amount if household income is greater than 25000 and less than or equal to 42620' do
+      subject.household_income = 30000
+      expect(subject.outcome).to match('2441')
+
+      subject.household_income = 35000
+      expect(subject.outcome).to match('1494')
+
+      subject.household_income = 40000
+      expect(subject.outcome).to match('547')
+
+      subject.household_income = 42620
+      expect(subject.outcome).to match('50')
+    end
+    
+    it 'should display zero maintenance grant amount if household income is greater than 42620' do
+      subject.household_income = 42620 + 1
+      expect(subject.outcome).to match('0')
+    end
+  end
 
   context 'EU student full-time' do
     before do
